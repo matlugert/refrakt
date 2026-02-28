@@ -1,4 +1,4 @@
-# refrakt
+# add-innovation skill
 
 **Evidence-gated innovation discovery for codebases.**
 
