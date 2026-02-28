@@ -1,11 +1,10 @@
 ---
-name: refrakt
+name: add-based-innovation
 description: >
-  Evidence-gated innovation discovery for codebases. Analyzes what a project
-  can do today, generates high-leverage feature candidates, self-critiques them,
-  then proves each one against the actual code before recommending a winner.
-  Use when exploring "what should we build next?" or when the user asks for
-  feature ideas, innovation candidates, or strategic additions to a project.
+  Deep evidence-gated innovation discovery for codebases. The thorough variant
+  of add-innovation — same core process but with detailed scoring rubrics,
+  structured candidate templates, winner thresholds, and scope estimation.
+  Use when you want the full analytical treatment with calibrated scoring.
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Task, WebSearch
 ---

@@ -2,9 +2,18 @@
 
 **Evidence-gated innovation discovery for codebases.**
 
-Refrakt takes your codebase, maps its capabilities, generates high-leverage feature candidates, self-critiques them, then **proves each one against the actual code** before recommending a winner with an implementation blueprint.
+Refrakt ships two commands that analyze your codebase, generate high-leverage feature candidates, self-critique them, then **prove each one against the actual code** before recommending a winner.
 
 It's the difference between "what if we added AI?" and "here's exactly how your existing `completion_history` table, `Formatter` interface, and tag hierarchy enable a velocity dashboard — and here are the 5 files to touch."
+
+## Two commands, same core
+
+| Command | Style | Best for |
+|---------|-------|----------|
+| `/add-innovation` | Lean and fast | Quick ideation sessions, rapid-fire exploration |
+| `/add-based-innovation` | Deep and structured | Thorough analysis with calibrated scoring rubrics, structured candidate templates, winner thresholds, and scope estimates |
+
+Both follow the same 5-phase process and hard evidence gate. The difference is ceremony: `add-innovation` is concise output, `add-based-innovation` adds detailed scoring rubrics, candidate format templates (Pitch/Mechanism/Compounds), a >= 15/25 winner threshold, and S/M/L scope estimation in the blueprint.
 
 ## What makes it different
 
@@ -16,7 +25,7 @@ The process:
 Capability Map → 5 Candidates → Self-Critique → Evidence Gate → Winner + Blueprint
 ```
 
-Each candidate is scored on 5 dimensions (leverage, feasibility, wow-factor, compounding value, evidence confidence) with a detailed rubric. The self-improving loop catches novelty inflation and hidden assumptions before the evidence gate catches missing proof.
+Each candidate is scored on 5 dimensions (leverage, feasibility, wow-factor, compounding value, evidence confidence). The self-improving loop catches novelty inflation and hidden assumptions before the evidence gate catches missing proof.
 
 ## Install
 
@@ -26,53 +35,60 @@ Each candidate is scored on 5 dimensions (leverage, feasibility, wow-factor, com
 claude plugin install mlugert/refrakt
 ```
 
-### As a slash command (manual)
+This installs both `/add-innovation` and `/add-based-innovation`.
 
-Copy the command file to your Claude Code commands directory:
+### As slash commands (manual)
+
+Copy the command files to your Claude Code commands directory:
 
 ```bash
 # Global (available in all projects)
-cp commands/refrakt.md ~/.claude/commands/refrakt.md
+cp commands/add-innovation.md ~/.claude/commands/add-innovation.md
+cp commands/add-based-innovation.md ~/.claude/commands/add-based-innovation.md
 
 # Project-only (available in one project)
-cp commands/refrakt.md .claude/commands/refrakt.md
+cp commands/add-innovation.md .claude/commands/add-innovation.md
+cp commands/add-based-innovation.md .claude/commands/add-based-innovation.md
 ```
 
-### As a skill (manual)
+### As skills (manual)
 
-Copy the skill directory:
+Copy the skill directories:
 
 ```bash
 # Global
-cp -r skills/refrakt ~/.claude/skills/refrakt
+cp -r skills/add-innovation ~/.claude/skills/add-innovation
+cp -r skills/add-based-innovation ~/.claude/skills/add-based-innovation
 
 # Project-only
-cp -r skills/refrakt .claude/skills/refrakt
+cp -r skills/add-innovation .claude/skills/add-innovation
+cp -r skills/add-based-innovation .claude/skills/add-based-innovation
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
-# Global command
-Copy-Item commands\refrakt.md "$env:USERPROFILE\.claude\commands\refrakt.md"
+# Global commands
+Copy-Item commands\add-innovation.md "$env:USERPROFILE\.claude\commands\"
+Copy-Item commands\add-based-innovation.md "$env:USERPROFILE\.claude\commands\"
 
-# Global skill
-Copy-Item -Recurse skills\refrakt "$env:USERPROFILE\.claude\skills\refrakt"
+# Global skills
+Copy-Item -Recurse skills\add-innovation "$env:USERPROFILE\.claude\skills\add-innovation"
+Copy-Item -Recurse skills\add-based-innovation "$env:USERPROFILE\.claude\skills\add-based-innovation"
 ```
 
 ## Usage
 
 ```
-/refrakt                          # Analyze entire project, optimize for leverage
-/refrakt AI features              # Focus on AI/ML innovation opportunities
-/refrakt developer experience     # Focus on DX improvements
-/refrakt performance              # Focus on performance innovations
-/refrakt new user segment         # Focus on reaching new users
+/add-innovation                       # Fast: analyze project, find best addition
+/add-innovation AI features           # Fast: focus on AI opportunities
+/add-based-innovation                 # Deep: full analytical treatment
+/add-based-innovation performance     # Deep: focus on performance innovations
 ```
 
 ## Output
 
-Refrakt produces 6 mandatory sections in a fixed order:
+Both commands produce 6 mandatory sections in a fixed order:
 
 | Section | What it contains |
 |---------|-----------------|
@@ -83,7 +99,9 @@ Refrakt produces 6 mandatory sections in a fixed order:
 | **Winner** | One winner (or explicit "no qualified winner") with justification |
 | **Implementation Blueprint** | Files to touch, interfaces, data flow, edge cases, rollout plan |
 
-See [examples/sample-output.md](examples/sample-output.md) for a complete example.
+`/add-based-innovation` adds to each section: detailed scoring rubric tables, structured candidate format (Pitch/Mechanism/Compounds), winner threshold (>= 15/25), and S/M/L scope estimation.
+
+See [examples/sample-output.md](examples/sample-output.md) for a complete example of the deep variant.
 
 ## Scoring dimensions
 
@@ -95,7 +113,7 @@ See [examples/sample-output.md](examples/sample-output.md) for a complete exampl
 | **Compounding value** | How much does this make existing capabilities more valuable? |
 | **Evidence confidence** | How well-grounded is this in the actual codebase? |
 
-Each scored 1-5. Winner threshold: >= 15/25. Full rubric in [skills/refrakt/scoring-rubric.md](skills/refrakt/scoring-rubric.md).
+Each scored 1-5. Full rubric (used by `/add-based-innovation`) in [skills/add-based-innovation/scoring-rubric.md](skills/add-based-innovation/scoring-rubric.md).
 
 ## Design principles
 
@@ -109,32 +127,32 @@ Each scored 1-5. Winner threshold: >= 15/25. Full rubric in [skills/refrakt/scor
 
 ```
 Phase A: Read project reality (structure, docs, git history, source)
-         ↓
+         |
 Phase B: Generate 5 candidates (accretive, feasible, non-obvious, compelling)
-         ↓
+         |
 Phase C: Self-critique all 5 (hidden assumptions, novelty inflation, dep risk)
          Revise once. Track the delta.
-         ↓
+         |
 Phase D: Evidence gate each candidate (3+ repo anchors, 0 critical deps)
          Hard gate: no evidence = no pass. No exceptions.
-         ↓
+         |
 Phase E: Pick one winner. Output implementation blueprint.
          Or: "No qualified winner" + next evidence-collection steps.
 ```
 
 ## FAQ
 
-**Q: What if no candidate passes the evidence gate?**
-A: Refrakt outputs "No qualified winner" with specific next steps to collect missing evidence. It never forces a recommendation.
+**Q: Which command should I use?**
+A: Start with `/add-innovation` for quick sessions. Use `/add-based-innovation` when you want the full analytical depth — calibrated rubrics, structured templates, scope estimates.
 
-**Q: Can I change the number of candidates?**
-A: The prompt is designed around 5 candidates as a sweet spot. Fewer limits diversity; more creates noise. You can fork and modify if needed.
+**Q: What if no candidate passes the evidence gate?**
+A: Both commands output "No qualified winner" with specific next steps. They never force a recommendation.
 
 **Q: Does it work with any language/framework?**
-A: Yes. Refrakt reads repo structure, docs, and source files. It works with any project that has source code and some form of documentation.
+A: Yes. Both commands read repo structure, docs, and source files. They work with any project that has source code.
 
 **Q: Does it require internet access?**
-A: No. All analysis is done against the local codebase. WebSearch is in the allowed tools list for optional context enrichment but is not required.
+A: No. All analysis is done against the local codebase.
 
 ## License
 
