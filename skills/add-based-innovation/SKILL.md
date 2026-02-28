@@ -87,15 +87,17 @@ You are running in **Hybrid Mode**:
 
 Score each candidate on these 5 dimensions (1-5 scale):
 
-| Dimension | 1 (Low) | 3 (Medium) | 5 (High) |
-|-----------|---------|------------|----------|
-| **Leverage** | Marginal improvement | Clear value-add | Force multiplier for the whole project |
-| **Feasibility** | Requires new infrastructure | Moderate integration work | Builds directly on existing code |
-| **Wow-factor** | Expected/obvious | Pleasantly surprising | "Why didn't we think of this before?" |
-| **Compounding value** | Standalone feature | Enhances 1-2 existing features | Makes everything else more valuable |
-| **Evidence confidence** | Speculative, few anchors | Some anchors, minor gaps | Strongly grounded, clear integration path |
+| Dimension | 1 (Low) | 3 (Medium) | 5 (High) | Calibration |
+|-----------|---------|------------|----------|-------------|
+| **Leverage** | Marginal improvement | Clear value-add | Force multiplier for the whole project | How many other features become more valuable if this ships? |
+| **Feasibility** | Requires new infrastructure | Moderate integration work | Builds directly on existing code | Could a dev build this in 1-3 sessions without asking "but how do we...?" |
+| **Wow-factor** | Expected/obvious | Pleasantly surprising | "Why didn't we think of this before?" | At a meetup, would people lean forward or nod politely? |
+| **Compounding value** | Standalone feature | Enhances 1-2 existing features | Makes everything else more valuable | Does this create value for existing users without them changing behavior? |
+| **Evidence confidence** | Speculative, few anchors | Some anchors, minor gaps | Strongly grounded, clear integration path | Could you hand this blueprint to a dev with no context and they'd find everything in the codebase? |
 
 **Total possible: 25 points.** Winner threshold: eligible candidates must score >= 15.
+
+**Auto-reject (score 0)**: Hygiene masquerading as innovation, infrastructure worship ("migrate to X" without user value), technology-first thinking ("use GraphQL" without explaining what it enables), vague magic ("AI-powered insights" without mechanism), bolt-on features that don't compound existing value.
 
 ## Output Contract (Mandatory Sections, In Order)
 

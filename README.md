@@ -1,158 +1,70 @@
 # add-innovation skill
 
-**Evidence-gated innovation discovery for codebases.**
+Your codebase already contains the next great feature. You just can't see it yet.
 
-Ships two commands that analyze your codebase, generate high-leverage feature candidates, self-critique them, then **prove each one against the actual code** before recommending a winner.
+Refrakt reads your project — the structure, the docs, the git history, the actual source — and finds the single highest-leverage thing hiding in plain sight. Not "add dark mode." Not "improve logging." The thing that makes someone say *"why didn't we think of this before?"*
 
-It's the difference between "what if we added AI?" and "here's exactly how your existing `completion_history` table, `Formatter` interface, and tag hierarchy enable a velocity dashboard — and here are the 5 files to touch."
+One winner. No menus. No hand-waving.
 
-## Two commands, same core
+## Two lanes, pick your speed
 
-| Command | Style | Best for |
-|---------|-------|----------|
-| `/add-innovation` | Lean and fast | Quick ideation sessions, rapid-fire exploration |
-| `/add-based-innovation` | Deep and structured | Thorough analysis with calibrated scoring rubrics, structured candidate templates, winner thresholds, and scope estimates |
+**`/add-innovation`** — the stretch lane.
+Dream big. What could this project *become*? Generates 5 moonshots, kills the boring ones, picks the most exciting survivor, and gives you a weekend experiment to validate it. Feasibility is not a filter — coherence is.
 
-Both follow the same 5-phase process and hard evidence gate. The difference is ceremony: `add-innovation` is concise output, `add-based-innovation` adds detailed scoring rubrics, candidate format templates (Pitch/Mechanism/Compounds), a >= 15/25 winner threshold, and S/M/L scope estimation in the blueprint.
-
-## What makes it different
-
-Most brainstorming produces ideas that sound great and fall apart on contact with reality. Refrakt has a **hard evidence gate**: every candidate must have 3+ concrete repo anchors proving feasibility, with zero critical unresolved dependencies. No evidence, no winner. It will tell you "no qualified winner" rather than recommend something speculative.
-
-The process:
+**`/add-based-innovation`** — the production lane.
+Ship smart. What should you *actually build next*? Same 5 candidates, but every one must prove itself against your actual code — 3+ repo anchors, zero critical unknowns. No evidence, no winner. You get a complete implementation blueprint or an honest "nothing qualifies yet."
 
 ```
-Capability Map → 5 Candidates → Self-Critique → Evidence Gate → Winner + Blueprint
+/add-innovation                     → "holy shit, we could do THAT?"
+/add-based-innovation               → "here's exactly how to build it"
 ```
 
-Each candidate is scored on 5 dimensions (leverage, feasibility, wow-factor, compounding value, evidence confidence). The self-improving loop catches novelty inflation and hidden assumptions before the evidence gate catches missing proof.
-
-## Install
-
-### As a Claude Code plugin (recommended)
+## Try it
 
 ```bash
+# Install (Claude Code plugin)
 claude plugin install mlugert/refrakt
+
+# Or just drop the commands in
+cp commands/add-innovation.md ~/.claude/commands/
+cp commands/add-based-innovation.md ~/.claude/commands/
 ```
 
-This installs both `/add-innovation` and `/add-based-innovation`.
-
-### As slash commands (manual)
-
-Copy the command files to your Claude Code commands directory:
-
-```bash
-# Global (available in all projects)
-cp commands/add-innovation.md ~/.claude/commands/add-innovation.md
-cp commands/add-based-innovation.md ~/.claude/commands/add-based-innovation.md
-
-# Project-only (available in one project)
-cp commands/add-innovation.md .claude/commands/add-innovation.md
-cp commands/add-based-innovation.md .claude/commands/add-based-innovation.md
-```
-
-### As skills (manual)
-
-Copy the skill directories:
-
-```bash
-# Global
-cp -r skills/add-innovation ~/.claude/skills/add-innovation
-cp -r skills/add-based-innovation ~/.claude/skills/add-based-innovation
-
-# Project-only
-cp -r skills/add-innovation .claude/skills/add-innovation
-cp -r skills/add-based-innovation .claude/skills/add-based-innovation
-```
-
-**Windows (PowerShell):**
-
-```powershell
-# Global commands
-Copy-Item commands\add-innovation.md "$env:USERPROFILE\.claude\commands\"
-Copy-Item commands\add-based-innovation.md "$env:USERPROFILE\.claude\commands\"
-
-# Global skills
-Copy-Item -Recurse skills\add-innovation "$env:USERPROFILE\.claude\skills\add-innovation"
-Copy-Item -Recurse skills\add-based-innovation "$env:USERPROFILE\.claude\skills\add-based-innovation"
-```
-
-## Usage
+Then open any project and run:
 
 ```
-/add-innovation                       # Fast: analyze project, find best addition
-/add-innovation AI features           # Fast: focus on AI opportunities
-/add-based-innovation                 # Deep: full analytical treatment
-/add-based-innovation performance     # Deep: focus on performance innovations
+/add-innovation
 ```
 
-## Output
+That's it. Watch it read your codebase and come back with something you didn't expect.
 
-Both commands produce 6 mandatory sections in a fixed order:
-
-| Section | What it contains |
-|---------|-----------------|
-| **Capability Map** | 5-8 bullets: what the project does, its stack, frontier, and gaps |
-| **Candidate Table** | 5 candidates scored across 5 dimensions (25-point scale) |
-| **Critique Delta** | What changed after the self-improvement cycle |
-| **Evidence Ledger** | Repo anchors, proof statements, unresolved deps, PASS/FAIL per candidate |
-| **Winner** | One winner (or explicit "no qualified winner") with justification |
-| **Implementation Blueprint** | Files to touch, interfaces, data flow, edge cases, rollout plan |
-
-`/add-based-innovation` adds to each section: detailed scoring rubric tables, structured candidate format (Pitch/Mechanism/Compounds), winner threshold (>= 15/25), and S/M/L scope estimation.
-
-See [examples/sample-output.md](examples/sample-output.md) for a complete example of the deep variant.
-
-## Scoring dimensions
-
-| Dimension | What it measures |
-|-----------|-----------------|
-| **Leverage** | How much does this amplify the project's overall impact? |
-| **Feasibility** | How buildable is this with what exists today? |
-| **Wow-factor** | How surprising and delightful is this? |
-| **Compounding value** | How much does this make existing capabilities more valuable? |
-| **Evidence confidence** | How well-grounded is this in the actual codebase? |
-
-Each scored 1-5. Full rubric (used by `/add-based-innovation`) in [skills/add-based-innovation/scoring-rubric.md](skills/add-based-innovation/scoring-rubric.md).
-
-## Design principles
-
-- **Evidence over enthusiasm.** Ideas are cheap. Proof is expensive. Refrakt requires proof.
-- **One winner, not a menu.** Decision fatigue kills innovation. You get one recommendation or none.
-- **Accretive, not additive.** Good features make existing features more valuable. Bolt-ons are banned.
-- **No hygiene.** "Better logging", "more tests", "add docs" are not innovations.
-- **Concrete, not hand-wavy.** "AI-powered insights" without a mechanism is auto-rejected.
-
-## How it works internally
+Want to narrow the focus? Pass an argument:
 
 ```
-Phase A: Read project reality (structure, docs, git history, source)
-         |
-Phase B: Generate 5 candidates (accretive, feasible, non-obvious, compelling)
-         |
-Phase C: Self-critique all 5 (hidden assumptions, novelty inflation, dep risk)
-         Revise once. Track the delta.
-         |
-Phase D: Evidence gate each candidate (3+ repo anchors, 0 critical deps)
-         Hard gate: no evidence = no pass. No exceptions.
-         |
-Phase E: Pick one winner. Output implementation blueprint.
-         Or: "No qualified winner" + next evidence-collection steps.
+/add-innovation AI features
+/add-based-innovation performance
 ```
 
-## FAQ
+## How it works
 
-**Q: Which command should I use?**
-A: Start with `/add-innovation` for quick sessions. Use `/add-based-innovation` when you want the full analytical depth — calibrated rubrics, structured templates, scope estimates.
+Both lanes start the same way — a deep read of your project to build a capability map. Then they diverge:
 
-**Q: What if no candidate passes the evidence gate?**
-A: Both commands output "No qualified winner" with specific next steps. They never force a recommendation.
+```
+                ┌─ stretch ─────────────────────────────────┐
+ Read project → │  5 moonshots → coherence critique →       │
+ Build map ─────┤  conviction vote → winner + experiment    │
+                ├─ production ──────────────────────────────┤
+                │  5 candidates → self-critique → evidence  │
+                │  gate (3+ anchors) → winner + blueprint   │
+                └───────────────────────────────────────────┘
+```
 
-**Q: Does it work with any language/framework?**
-A: Yes. Both commands read repo structure, docs, and source files. They work with any project that has source code.
+## What it won't do
 
-**Q: Does it require internet access?**
-A: No. All analysis is done against the local codebase.
+- Suggest "better logging", "more tests", or "add documentation"
+- Recommend something generic that could apply to any project
+- Give you a list of 5 options and say "pick one"
+- Force a winner when nothing qualifies
 
 ## License
 
