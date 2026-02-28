@@ -11,12 +11,12 @@ One winner. No menus. No hand-waving.
 **`/add-innovation`** — dream big.
 What could this project *become*? Generates 5 moonshots, kills the boring ones, picks the most exciting survivor, and hands you a weekend experiment to validate it. Feasibility is not a filter — coherence is.
 
-**`/add-based-innovation`** — ship smart.
-What should you *actually build next*? Same 5 candidates, but every one must prove itself against your actual code — 3+ repo anchors, zero critical unknowns. No evidence, no winner. You get a decision-complete blueprint or an honest "nothing qualifies yet."
+**`/add-based-innovation`** — discover what's already there.
+Your repo has data flows, interfaces, and patterns that compose into something bigger than their original purpose. This finds that composition and proves it file by file — 3+ repo anchors, zero critical unknowns, or no winner.
 
 ```
-/add-innovation                     → "holy shit, we could do THAT?"
-/add-based-innovation               → "here's exactly how to build it"
+/add-innovation                     → "holy shit, great idea — let's explore this"
+/add-based-innovation               → "wait — we can already do this?"
 ```
 
 ## Get started
