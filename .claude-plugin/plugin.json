@@ -1,0 +1,17 @@
+{
+  "name": "refrakt",
+  "description": "Evidence-gated innovation discovery for codebases. Analyzes project capabilities, generates high-leverage feature candidates, self-critiques them, then proves each against the actual code before recommending a winner with an implementation blueprint.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matthias Lugert",
+    "url": "https://github.com/mlugert"
+  },
+  "license": "MIT",
+  "keywords": [
+    "innovation",
+    "ideation",
+    "strategy",
+    "codebase-analysis",
+    "feature-discovery"
+  ]
+}
