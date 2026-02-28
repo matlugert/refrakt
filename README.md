@@ -2,7 +2,7 @@
 
 **Evidence-gated innovation discovery for codebases.**
 
-Refrakt ships two commands that analyze your codebase, generate high-leverage feature candidates, self-critique them, then **prove each one against the actual code** before recommending a winner.
+Ships two commands that analyze your codebase, generate high-leverage feature candidates, self-critique them, then **prove each one against the actual code** before recommending a winner.
 
 It's the difference between "what if we added AI?" and "here's exactly how your existing `completion_history` table, `Formatter` interface, and tag hierarchy enable a velocity dashboard — and here are the 5 files to touch."
 
