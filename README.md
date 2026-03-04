@@ -63,6 +63,10 @@ Both lanes start with a deep read of your project. Then they diverge:
 - Give you a list of 5 options and say "pick one"
 - Force a winner when nothing qualifies
 
+## Author
+
+[Matthias Lugert](https://github.com/matlugert)
+
 ## License
 
 MIT
