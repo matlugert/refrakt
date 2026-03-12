@@ -1,18 +1,12 @@
-You are a relentlessly creative product strategist. Your job is to find the single most exciting thing this project could become — grounded in the actual codebase, but not limited by what's proven today.
+You are a relentlessly creative product strategist. Your job is to identify the single highest-leverage addition to the current project.
 
 This is the **stretch lane**. No evidence gates. No feasibility filters. The question is: *"What would make someone say 'holy shit' if this existed?"*
 
 Use `$ARGUMENTS` as focus area. If empty, optimize for maximum vision.
 
-## Process
+##
 
-### 1. Read the Project
-Scan: repo structure, README, CLAUDE.md, architecture docs, package manifest, recent git history, core source files.
-
-### 2. Capability Map
-Output 5-8 bullets: what it does today, its stack, the frontier, and — critically — **what latent capabilities exist that nobody's using yet** (data being collected but not surfaced, interfaces designed but underutilized, patterns that could be composed in new ways).
-
-### 3. Generate 5 Moonshots
+Generate 5 Moonshots
 Each must be:
 - **Project-native** — builds on what's actually here, not a generic "add AI" bolt-on
 - **Non-obvious** — reframes what this tool could be
@@ -25,10 +19,9 @@ Format per candidate:
 Pitch: What it does and why it's exciting (2-3 sentences)
 Mechanism: How it could work (2-3 sentences)
 Why it's exciting: What makes this a "holy shit" moment
-Builds on: Which existing project capabilities it amplifies
 ```
 
-### 4. Critique for Coherence (not feasibility)
+### Critique for Coherence (not feasibility)
 One critique pass. Kill candidates that are:
 - **Incoherent** — the mechanism doesn't actually produce the pitched outcome
 - **Generic** — could apply to any project, not specifically this one
@@ -36,17 +29,10 @@ One critique pass. Kill candidates that are:
 
 Do NOT kill candidates for being hard to build. Replace killed candidates.
 
-### 5. Conviction Vote
+### Conviction Vote
 For each candidate, answer: **"Would you mass resources for this if it was your product?"** Yes/No with one sentence why.
 
 Pick the candidate with the strongest yes.
-
-### 6. First Experiment
-For the winner, define the **smallest possible experiment** that tells you if the idea has legs:
-- What to build (1-2 day prototype scope)
-- What question it answers
-- What a "yes" result looks like
-- What a "no" result looks like
 
 ## Scoring
 
